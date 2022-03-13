@@ -46,20 +46,6 @@ for result in result_os.split('\n'):
 #!/usr/bin/env python3
 
 import os
-
-bash_command = ["cd ~/netology/sysadm-homeworks", "git status"]
-result_os = os.popen(' && '.join(bash_command)).read()
-for result in result_os.split('\n'):
-    if result.find('modified') != -1:
-        prepare_result = result.replace('\tmodified:   ', '')
-        print(prepare_result)
-```
-
-### Вывод скрипта при запуске при тестировании:
-```python
-#!/usr/bin/env python3
-
-import os
 cmd='cd ~/netology/sysadm-homeworks'
 bash_command = [cmd, "git status"]
 result_os = os.popen(' && '.join(bash_command)).read()
@@ -71,31 +57,71 @@ for result in result_os.split('\n'):
         print(res)
 ```
 
+### Вывод скрипта при запуске при тестировании:
+Делал на своём репозитарии
+
+![изображение](https://user-images.githubusercontent.com/16610642/158017332-bd1d9813-370e-42b6-b780-dec3824348f9.png)
+
+
 ## Обязательная задача 3
 1. Доработать скрипт выше так, чтобы он мог проверять не только локальный репозиторий в текущей директории, а также умел воспринимать путь к репозиторию, который мы передаём как входной параметр. Мы точно знаем, что начальство коварное и будет проверять работу этого скрипта в директориях, которые не являются локальными репозиториями.
 
 ### Ваш скрипт:
 ```python
-???
+#!/usr/bin/env python3
+
+import os
+import sys
+
+if len(sys.argv)>1:
+    cmd=sys.agrv[1]
+    if os.path.isdir(cmd):
+        bash_command = ["cd "+cmd, "git status"]
+        result_os = os.popen(' && '.join(bash_command)).read()
+        for result in result_os.split('\n'):
+            if result.find('fatal:') != -1:
+                print(result)
+            else:
+                if result.find('modified') != -1:
+                prepare_result = result.replace('\tmodified:   ', '/')
+                res=cmd + prepare_result
+                print(res)
+    else:
+        print('directory is not local')
+else:
+    print('arguments are not correct')        
 ```
 
 ### Вывод скрипта при запуске при тестировании:
-```
-???
-```
+
+![изображение](https://user-images.githubusercontent.com/16610642/158019887-4c5e0d09-b708-4a07-b251-1486285bfc63.png)
+
+
 
 ## Обязательная задача 4
 1. Наша команда разрабатывает несколько веб-сервисов, доступных по http. Мы точно знаем, что на их стенде нет никакой балансировки, кластеризации, за DNS прячется конкретный IP сервера, где установлен сервис. Проблема в том, что отдел, занимающийся нашей инфраструктурой очень часто меняет нам сервера, поэтому IP меняются примерно раз в неделю, при этом сервисы сохраняют за собой DNS имена. Это бы совсем никого не беспокоило, если бы несколько раз сервера не уезжали в такой сегмент сети нашей компании, который недоступен для разработчиков. Мы хотим написать скрипт, который опрашивает веб-сервисы, получает их IP, выводит информацию в стандартный вывод в виде: <URL сервиса> - <его IP>. Также, должна быть реализована возможность проверки текущего IP сервиса c его IP из предыдущей проверки. Если проверка будет провалена - оповестить об этом в стандартный вывод сообщением: [ERROR] <URL сервиса> IP mismatch: <старый IP> <Новый IP>. Будем считать, что наша разработка реализовала сервисы: `drive.google.com`, `mail.google.com`, `google.com`.
 
 ### Ваш скрипт:
 ```python
-???
+#!/usr/bin/env python3
+
+import socket 
+
+hostlist = {'drive.google.com':'108.177.14.194', 'mail.google.com':'216.58.209.197', 'google.com':'216.58.21.174'}
+for st in hostlist:
+    for i in range(5):
+        ip = socket.gethostbyname(st)
+        if ip != hostlist[st]:
+            print(' [ERROR] ' + str(st) +' IP mistmatch: '+hostlist[st]+' '+ip)
+            hostlist[st]=ip
+        else:
+            print(str(st)+' '+ip)
 ```
 
 ### Вывод скрипта при запуске при тестировании:
-```
-???
-```
+
+![изображение](https://user-images.githubusercontent.com/16610642/158048359-4a7911fc-f7ac-4e27-9380-8776aef81092.png)
+
 
 ## Дополнительное задание (со звездочкой*) - необязательно к выполнению
 
