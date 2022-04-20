@@ -33,6 +33,26 @@ Gitlab сервер для реализации CI/CD процессов и пр
 Docker является одним из рекомендованных разработчиками способов установки, следовательно подходит.
 
 ## Обязательная задача 3
-
+'''
+root@spinxaler-VirtualBox:~# docker run --name my_centos -d -v /home/spinxaler/data:/data centos  sleep 10000
+e70de35d058ed1bd64ba96e2289d602a6ae6b0c6d0ed11679a892b94a5f648de
+root@spinxaler-VirtualBox:~# docker run --name my_debian -d -v /home/spinxaler/data:/data debian  sleep 10000
+5c52b6a8e41417e71f8b5bc3fd80c87e947c529d0ff714ed95255b9ae856819c
+root@spinxaler-VirtualBox:~# docker ps
+CONTAINER ID   IMAGE     COMMAND         CREATED          STATUS          PORTS     NAMES
+5c52b6a8e414   debian    "sleep 10000"   8 seconds ago    Up 7 seconds              my_debian
+e70de35d058e   centos    "sleep 10000"   27 seconds ago   Up 25 seconds             my_centos
+root@spinxaler-VirtualBox:~# docker exec -ti my_centos /bin/bash
+[root@e70de35d058e /]# echo "My_centos_first_docker" > /data/centos_file
+[root@e70de35d058e /]# exit
+exit
+root@spinxaler-VirtualBox:~# echo "My_host_locall" > /home/spinxaler/data/Host_file
+root@spinxaler-VirtualBox:~# docker exec -ti my_debian /bin/bash
+root@5c52b6a8e414:/# ls /data
+Host_file  centos_file
+root@5c52b6a8e414:/# exit
+exit
+root@spinxaler-VirtualBox:~# 
+'''
 
 ## Обязательная задача 4
