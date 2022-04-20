@@ -33,7 +33,7 @@ Gitlab сервер для реализации CI/CD процессов и пр
 Docker является одним из рекомендованных разработчиками способов установки, следовательно подходит.
 
 ## Обязательная задача 3
-'''
+```
 root@spinxaler-VirtualBox:~# docker run --name my_centos -d -v /home/spinxaler/data:/data centos  sleep 10000
 e70de35d058ed1bd64ba96e2289d602a6ae6b0c6d0ed11679a892b94a5f648de
 root@spinxaler-VirtualBox:~# docker run --name my_debian -d -v /home/spinxaler/data:/data debian  sleep 10000
@@ -53,6 +53,6 @@ Host_file  centos_file
 root@5c52b6a8e414:/# exit
 exit
 root@spinxaler-VirtualBox:~# 
-'''
+```
 
 ## Обязательная задача 4
