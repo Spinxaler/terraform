@@ -3,7 +3,7 @@
 
 ## Обязательная задача 1
 
-https://hub.docker.com/u/spinxaler
+https://hub.docker.com/repository/docker/spinxaler/ngnix
 
 ## Обязательная задача 2
 Сценарий:
@@ -55,4 +55,5 @@ exit
 root@spinxaler-VirtualBox:~# 
 ```
 
-## Обязательная задача 4
+## Необязательная задача 4
+
