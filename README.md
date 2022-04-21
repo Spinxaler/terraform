@@ -57,3 +57,4 @@ root@spinxaler-VirtualBox:~#
 
 ## Необязательная задача 4
 
+https://hub.docker.com/repository/docker/spinxaler/ansible
